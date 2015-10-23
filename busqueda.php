@@ -1,83 +1,91 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>Buscar animals perduts/trobats</title>
-		<link rel="icon" href="http://media.animalear.com/media/favicon/default/favicon.ico" type="image/x-icon">
-	</head>
-	<body>
-		<?php
-			//realizamos la conexión con mysql
-			$con = mysqli_connect('localhost', 'root', '', 'bd_botiga_animals');
-
-			//como la sentencia SIEMPRE va a buscar todos los registros de la tabla producto, pongo en la variable $sql esa parte de la sentencia que SI o SI, va a contener
-			$sql = "SELECT * FROM tbl_anunci WHERE ";
-
-			
-
-			
-
-
-			//VERSION BETA
-			//controlar checkbox
-			if(!isset($_REQUEST['estado_animal'])){
-				echo "No se muestra nada";
-			} else {
-				$count = 0;
-				foreach ($_REQUEST['estado_animal'] as $opcionEstado[]) {
-				$count+=1;			
+<?php
+include_once 'html_head.php';
+include_once 'conexion.php';
+include_once 'cabecera.php';
+  
+$consulta_raca = ("SELECT * FROM tbl_raca");
+$consulta_animal = ("SELECT * FROM tbl_tipus_animal");
+$consulta_municipi = ("SELECT * FROM tbl_municipi");
+$result_raca = mysqli_query($con, $consulta_raca);
+$result_animal = mysqli_query($con, $consulta_animal);
+$result_municipi = mysqli_query($con, $consulta_municipi);
+?>
+		<script type="text/javascript">
+			<?php
+			$races = [];
+				while($fila=mysqli_fetch_array($result_raca)) {
+					$races[] = [
+						'value' => utf8_encode($fila['raca_id']),
+						'tipus_anim_id' => utf8_encode($fila['tipus_anim_id']),
+						'display' => utf8_encode($fila['raca_nom']),
+					];
 				}
-
-				if ($count==0) {
-					$sql = "";
-				}
-				if ($count>0) {
-					$sql.= " anu_tipus=$opcionEstado[0]";
-					if ($count>1){
-						$sql.= " OR anu_tipus=$opcionEstado[1]";
+				echo 'var races = '. json_encode($races) . ';';
+	        ?>
+		
+			function updateRacasSelect(value)
+			{
+				var options = '<option value="0">Seleccionar</option>';
+				for (var i = 0; i < races.length; i++) {
+					if (races[i].tipus_anim_id == value) {
+						options += '<option value="'+races[i].value+'">'+races[i].display+'</option>';
 					}
 				}
-
-				//DATOS COMBOBOX
-				if(($_REQUEST['raca'] == '')){
-					echo "No se muestra raza";
-					// $sql .= "raca_id != ''";
-					
-				}
-				else {
-				$raca=$_REQUEST['raca'];
-				$sql .= " AND raca_id = $raca";
-				echo $raca;
-				}
-
-				//mostramos la consulta para ver por pantalla si es lo que esperábamos o no
-				$sql .= " ORDER BY anu_data ASC";
-				echo "$sql<br/>";
-
-
-				//lanzamos la sentencia sql
-				$datos = mysqli_query($con, $sql);
-
-				//extraemos los productos uno a uno en la variable $anuncio que es un array
-				while($anuncio = mysqli_fetch_array($datos)){
-					echo "<b>Nom:</b> $anuncio[anu_nom]<br/>";
-					echo "<b>Contingut:</b> ";
-					echo utf8_encode($anuncio['anu_contingut']);
-					echo "<br/>";
-					echo "<b>Data:</b> $anuncio[anu_data]<br/>";					
-					$fichero="img/$anuncio[anu_foto]";
-					if(file_exists($fichero)){
-						echo "<img src='$fichero'><br/><br/><br/>";
-					}
-					else{
-						echo "<img src =' img/no_disponible.jpg'/><br/><br>";
-					}
-
-					
-				}
+				var races_select = document.getElementById('racas');
+				races_select.innerHTML = options;
+				races_select.disabled = value == 0;
 			}
-			//cerramos la conexión con la base de datos
-			mysqli_close($con);
-		?>
-	</body>
-</html>
+
+						// Mozilla, Opera, Webkit 
+			if ( document.addEventListener ) {
+			 	 document.addEventListener( "DOMContentLoaded", function(){
+			    document.removeEventListener( "DOMContentLoaded", arguments.callee, false);
+			    updateRacasSelect(document.getElementById('animal_tipo_select').value);
+			  }, false );
+
+			// If IE event model is used
+			} else if ( document.attachEvent ) {
+			  // ensure firing before onload
+			  document.attachEvent("onreadystatechange", function(){
+			    if ( document.readyState === "complete" ) {
+			      document.detachEvent( "onreadystatechange", arguments.callee );
+					updateRacasSelect(document.getElementById('animal_tipo_select').value);    }
+			  });
+			}
+		</script>
+		<form action="resultados.php" method="GET">
+			<input id="checkbox" type="checkbox" name="estado_animal[]" value="0">Perdido<br/><br>
+			<input id="checkbox" type="checkbox" name="estado_animal[]" value="1">Encontrado<br/><br>
+		
+		<!-- TIPO DE ANIMAL -->
+	   	<select id="animal_tipo_select" name="animal_tipo" onchange="updateRacasSelect(this.value)">
+				<option value="0">Seleccionar</option>
+				<?php
+				while($fila=mysqli_fetch_array($result_animal)){
+					echo utf8_encode("<option value=\"$fila[tipus_anim_id]\">$fila[tipus_anim_nom]</option>");
+				}
+	        	?>
+	   	</select><br/><br>
+
+
+		<!-- RAZAS -->
+		<select id="racas" name="raca" disabled="disabled">
+	   	</select><br/><br>
+
+	   	<!-- MUNICIPIO -->
+		<select id="mun" name="mun">
+				<option value="">Seleccionar</option>
+				<?php
+				while($fila=mysqli_fetch_array($result_municipi)){
+					echo utf8_encode("<option value=\"$fila[municipi_id]\">$fila[municipi_nom]</option>");
+				}
+	        	?>
+	    </select><br/><br>
+	   	
+			<input id="boton" type="submit" value="Enviar">
+			<input id="boton" type="reset" value="Cancelar">
+			<input id="boton" type="button" onclick="alert('Rellena los campos para encontrar a tu mascota')" value="?">
+			<a href="alta_anunci.php" type="button" class="button">Dar de alta un anuncio</a>
+
+		</form>
+		<?php  include "footer.php";

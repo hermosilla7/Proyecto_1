@@ -1,0 +1,134 @@
+#home {
+    width: 46px;
+    height: 44px;
+    background-image: url(img/iconoHome.png);
+}
+
+#next {
+    width: 43px;
+    height: 44px;
+    background: url(img/botonAtras.png);
+}
+
+#prev {
+    width: 43px;
+    height: 44px;
+    background: url(img/botonAdelante.png);
+}
+
+#perd {
+  color: white;
+  text-align: center;
+  font-family: calibri;
+  margin-top: 150px;
+}
+
+#boton {
+  color: white;
+  background-color: #dd4f37;
+  border: 1px #000000 solid;
+  padding: 5px 20px 5px 20px;
+  font-family: calibri;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#animal_tipo_select {
+  color: black;
+  border: 1px #000000 solid;
+  padding: 5px 20px 5px 20px;
+  font-family: calibri;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#racas {
+  color: black;
+  border: 1px #000000 solid;
+  font-family: calibri;
+  padding: 5px 20px 5px 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#mun {
+  color: black;
+  border: 1px #000000 solid;
+  width: 140px;
+  height: 31px;
+  font-family: calibri;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#selects {
+  width: 150px;
+  height: 40px;
+  color: black;
+  border: 1px #000000 solid;
+  padding: 5px 20px 5px 20px;
+  font-family: calibri;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#nom {
+  color: black;
+  border: 1px #000000 solid;
+  width: 140px;
+  height: 31px;
+  text-align: left;
+  font-family: calibri;
+  border-radius: 5px;
+}
+
+#contin {
+  width: 150px;
+  height: 100px;
+  color: black;
+  border: 1px #000000 solid;
+  padding: 5px 20px 5px 20px;
+  font-family: calibri;
+  text-align: left;
+  border-radius: 5px;
+}
+
+h1 {
+  font-family: calibri;
+  font-size: 40px;
+}
+
+.squaredOne {
+	width: 28px;
+	height: 28px;
+	background: #dc4d3d;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#df493b',GradientType=0 );
+	margin: 20px auto;
+	-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	position: relative;
+}
+
+/*CHECKBOX ESTILO*/
+#checkbox{
+  width: 20px;
+  height: 20px;
+}
+
+
+/*Boton perdidos*/
+
+.actions{margin-top:15px}.cart-container1{position:relative}.block-cart-button1{background:#dd4b3b;color:#fff;font-size:13px;width:190px;height:25px;padding:9px
+10px 0 10px;border-radius:3px;margin-top:16px;margin-left:18px;float:right;cursor:pointer}.block-cart-button1:hover{background:#aa3a2e}.block-cart-button1 .cart-icon1{display:inline-block;width:23px;height:24px;margin:-4px 20px 0 15px;background:url('/skin/frontend/default/animalear/images/sprite.png') -47px -62px no-repeat;vertical-align:top;float:left}.block-cart-button1 .block-cart1{position:absolute;width:325px;display:none;background:#fff;z-index:2000;top:16px;right:0;border-radius:3px;box-shadow:0 1px 5px #222}.block-cart1 .block-title1{height:55px;background:#dd4b3b;border-top-left-radius:3px;border-top-right-radius:3px}.block-cart .block-title .cart-icon1{display:inline;width:31px;height:31px;) -769px -126px no-repeat;margin-left:25px;margin-top:10px;float:left}.block-cart1 .block-title1 .block-cart1 .block-content1 .block-cart1 .block-content1
+
+/*Sacar una linea que aparecia en pantalla*/
+
+.hanger{position:absolute;top:-26px;width:13px;height:50px;background:url('/skin/frontend/default/animalear/images/sprite.png') -1170px -2px no-repeat}.home-banner-carousel-wrapper{position:relative;height:400px}.home-banner-carousel-wrapper .wave-white-minus-top{height:3px;width:100%;display:block;background:url(/skin/frontend/default/animalear/images/wave_white_minus_top.png) repeat-x;position:absolute;top:0;z-index:1}.carousel-wave-white{height:4px;width:100%;background:url(/skin/frontend/default/animalear/images/wave_white_top.png) repeat-x;position:absolute;margin-top:-2px;z-index:1}.home-banner-carousel{}.home-banner{float:left}.home-banner.first{background:#dd4b3b}.home-banner.first
+button.button{background:#5fbcae}
